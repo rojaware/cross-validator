@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Room } from './rooms';
 import { AbstractControl } from '@angular/forms';
-import { RoomOver18Validator } from './room-over-18.validator';
+
 
 @Component({
   selector: 'app-root',
@@ -22,20 +22,14 @@ export class AppComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private roomOver18Validator: RoomOver18Validator
   ) {}
 
   ngOnInit() {
     this.form = this.formBuilder.group(
       {
-        firstName: ['', Validators.required],
-        lastName: ['', Validators.required],
-        age: ['', [Validators.required, NoNegativeNumbers]],
+        name: ['', Validators.required],
         room: [{}, Validators.required],
-      },
-      {
-        validators: [this.roomOver18Validator.onlyAccessRoomsOver18(18)],
-        updateOn: 'blur',
+        price: ['']
       }
     );
   }

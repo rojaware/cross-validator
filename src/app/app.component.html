@@ -1,4 +1,5 @@
 <div class="container">
+  <h4>Bed & Breakfast</h4>
   <mat-card class="card">
     <form
       [formGroup]="form"
@@ -6,22 +7,18 @@
       class="example-form"
     >
       <mat-form-field appearance="fill" class="example-full-width">
-        <mat-label> First Name:</mat-label>
-        <input matInput formControlName="firstName" />
+        <mat-label>Host Name:</mat-label>
+        <input matInput formControlName="name" />
       </mat-form-field>
       <br />
-      <mat-form-field appearance="fill" class="example-full-width">
-        <mat-label> Last Name:</mat-label>
-        <input matInput formControlName="lastName" />
-      </mat-form-field>
-      <br />
+      
 
       <mat-form-field appearance="fill" class="example-full-width">
-        <mat-label>Age:</mat-label>
-        <input matInput formControlName="age" type="number" />
+        <mat-label>Price:</mat-label>
+        <input matInput formControlName="price" type="number" />
         <mat-error>
-          <span *ngIf="form.get('age').errors?.negativeNumber">
-            Please provide a valid age
+          <span *ngIf="form.get('price').errors?.negativeNumber">
+            Please provide price in positive amount
           </span>
         </mat-error>
       </mat-form-field>
@@ -46,8 +43,8 @@
         Submit
       </button>
       <mat-error>
-        <span *ngIf="form.errors?.roomOnlyWith18">
-          You can not access this room being under 18
+        <span *ngIf="form.errors?.roomOver50Dollars">
+          You can not sell this room under $50
         </span>
       </mat-error>
     </form>

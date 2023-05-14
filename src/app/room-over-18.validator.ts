@@ -4,22 +4,22 @@ import { Room } from './rooms';
 
 @Injectable({ providedIn: 'root' })
 export class RoomOver18Validator {
-  public onlyAccessRoomsOver18(minAge: number): ValidatorFn {
+  public onlyAccessRoomsOver18(minPrice: number): ValidatorFn {
     return (formGroup: FormGroup) => {
-      const ageControl = formGroup.get('age');
+      const priceControl = formGroup.get('price');
       const roomControl = formGroup.get('room');
 
-      if (!ageControl || !roomControl) {
+      if (!priceControl || !roomControl) {
         return null;
       }
 
-      const ageValue = ageControl.value;
+      const priceValue = priceControl.value;
 
-      if (!ageValue) {
+      if (!priceValue) {
         return null;
       }
 
-      if (ageValue >= minAge) {
+      if (priceValue >= minPrice) {
         return null;
       }
 
@@ -30,7 +30,7 @@ export class RoomOver18Validator {
       }
 
       if (roomsValue.value === 'room-2' || roomsValue.value === 'room-3') {
-        return { roomOnlyWith18: true };
+        return { roomOver50Dollars: true };
       }
 
       return null;
