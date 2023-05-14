@@ -1,0 +1,68 @@
+<div class="container">
+  <mat-card class="card">
+    <form
+      [formGroup]="form"
+      (ngSubmit)="onSubmit()"
+      class="example-form"
+    >
+      <mat-form-field appearance="fill" class="example-full-width">
+        <mat-label> First Name:</mat-label>
+        <input matInput formControlName="firstName" />
+      </mat-form-field>
+      <br />
+      <mat-form-field appearance="fill" class="example-full-width">
+        <mat-label> Last Name:</mat-label>
+        <input matInput formControlName="lastName" />
+      </mat-form-field>
+      <br />
+
+      <mat-form-field appearance="fill" class="example-full-width">
+        <mat-label>Age:</mat-label>
+        <input matInput formControlName="age" type="number" />
+        <mat-error>
+          <span *ngIf="form.get('age').errors?.negativeNumber">
+            Please provide a valid age
+          </span>
+        </mat-error>
+      </mat-form-field>
+      <br />
+
+      <mat-form-field>
+        <mat-label>Request room access</mat-label>
+        <mat-select formControlName="room">
+          <mat-option *ngFor="let room of rooms" [value]="room">
+            {{ room.text }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <br />
+
+      <button
+        mat-raised-button
+        color="primary"
+        type="submit"
+        [disabled]="!form.valid"
+      >
+        Submit
+      </button>
+      <mat-error>
+        <span *ngIf="form.errors?.roomOnlyWith18">
+          You can not access this room being under 18
+        </span>
+      </mat-error>
+    </form>
+  </mat-card>
+
+  <mat-card class="card" *ngIf="isSubmitted">
+    <h4>Saved Successfully</h4>
+    <pre>{{ form.value | json }}</pre>
+
+  </mat-card>
+  
+  <mat-card class="card">
+    <h4>Form Errors</h4>
+    <pre>{{ form.errors | json }}</pre>
+    <h4>Control room errors</h4>
+    <pre>{{ form.get("room").errors | json }}</pre>
+  </mat-card>
+</div>
